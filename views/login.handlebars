@@ -1,0 +1,39 @@
+{{# if success }}
+<section class="success">
+    <h2>Sisäänkirjautuminen onnistui!</h2>
+</section>
+{{ else }}
+<div class="container">
+    <header class="header">
+        <h1 id="otsikko">{{ title }}</h1>
+    </header>
+    <div class="row-2">
+        <form action="/signin" method="post" class="login">
+            {{# if errors }}
+            <section class="errors">
+                <ul>
+                    {{# each errors }}
+                    <li>{{ this.msg }}</li>
+                    <li>{{ message }}</li>
+                    {{/each}}
+                </ul>
+            </section>
+            {{/if}}
+             {{# if error }}
+            <section class="errors">
+               <p>{{ error }}</p>
+            </section>
+            {{/if}}
+            <h2 id="login-header">Kirjaudu sisään</h2>
+            <label for="username">Tunnus:</label>
+            <input class="input" type="text" name="username">
+            <label for="password">Salasana:</label>
+            <input class="input" type="password" name="password">
+            <button class="button-green" type="submit">Kirjaudu</button>
+            <a id="register-link" href="#">Rekisteröidy</a>
+        </form>
+    </div>
+    <div class="row-3">
+    </div>
+</div>
+{{/if}}
