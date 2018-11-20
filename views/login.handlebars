@@ -1,7 +1,4 @@
 {{# if success }}
-<section class="success">
-    <h2>Sisäänkirjautuminen onnistui!</h2>
-</section>
 {{ else }}
 <div class="container">
     <header class="header">
@@ -32,8 +29,36 @@
             <button class="button-green" type="submit">Kirjaudu</button>
             <a id="register-link" href="#">Rekisteröidy</a>
         </form>
-    </div>
+    </div>  
     <div class="row-3">
+    </div>
+    <div id="dialog_rek">
+        <form id="rek_form" name="rek_form">
+            <div class="alert alert-error collapse" role="alert" id="nimityhja">
+                <span>
+                    <p>Nimi kenttä on tyhjä!</p>
+                </span>
+            </div>
+            <label for="nimi">Nimi : </label>
+			<input type="text" id="nimi" name="nimi">
+
+            <br>
+
+			<label for="osoite">Osoite : </label>
+			<input type="text" id="osoite" name="osoite">
+
+			<label for="tunnus">Tunnus : </label>
+		    <input type="text" id="tunnus" name="tunnus">
+
+			<label for="salasana">Salasana : </label>
+			<input type="password" id="salasana" name="salasana">
+
+            <label for="salasana2">Salasana uudelleen : </label>
+			<input type="password" id="salasana2" name="salasana2">
+
+			<label for="puh">Puhelinnumero</label>
+			<input type="text" id="puh" name="puh">
+		</form> 
     </div>
 </div>
 {{/if}}
