@@ -197,4 +197,11 @@ tr:nth-child(even) {background-color: #999898;}
     padding: .5em;
 
 }
+.def {
+    background: white;
+    padding: 5px;
+    margin-bottom: 12px;
+    display: inline-block;
+    border: 1px solid #DDDDDD;
+}
   
