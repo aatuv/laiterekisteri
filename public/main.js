@@ -20,10 +20,7 @@ $(document).ready(function(){
                 text: 'Rekisteröidy', 
                 click: function(){ 
                     if(validate() == true){
-                        if(lisaaKayttaja()){
-                            tyhjenna();
-                            $(this).dialog("close"); 
-                        }
+                        testaaSamaKayttaja();
                     }
                 }, class:"button-green" 
             }
@@ -41,6 +38,34 @@ $(document).ready(function(){
     });
 
 });
+function testaaSamaKayttaja(){
+    var kayttajaData = {
+        tunnus :  $("#tunnus").val(),
+    }
+    console.log(JSON.stringify(kayttajaData));
+    console.log('tarkistetaan käyttäjä');
+    var url = 'http://localhost:3001/****';
+    // DO GET
+    $.ajax({
+        type: "GET",
+        url: url,
+        contentType : "application/json",
+        data: JSON.stringify(kayttajaData),
+        dataType: 'json',
+        success: function(data) {
+            console.log('success');
+            console.log(JSON.stringify(data));
+            
+        },
+        error : function(e) {
+            alert("Virhe!")
+            console.log("ERROR: ", e);
+        },
+        complete: function (data) {
+            lisaaKayttaja();
+           }
+      });
+}
 function lisaaKayttaja(){
     //lähetettävä data
     var formData = {
@@ -64,11 +89,16 @@ function lisaaKayttaja(){
         success: function(data) {
             console.log('success');
             console.log(JSON.stringify(data));
+            
         },
         error : function(e) {
             alert("Virhe!")
             console.log("ERROR: ", e);
-        }
+        },
+        complete: function (data) {
+            tyhjenna();
+            $(this).dialog("close"); 
+           }
       });
 }
 var i = 0;
