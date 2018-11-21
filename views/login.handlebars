@@ -34,30 +34,68 @@
     </div>
     <div id="dialog_rek">
         <form id="rek_form" name="rek_form">
-            <div class="alert alert-error collapse" role="alert" id="nimityhja">
-                <span>
-                    <p>Nimi kenttä on tyhjä!</p>
-                </span>
+            <div id="info_" class="alert alert-info alert-dismissible fade in" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" >&times;</a>
+                <strong>Kaikki kentät pakollisia!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="nimityhja">
+                <strong>Nimi kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="osoitetyhja">
+                <strong>Osoite kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="tunnustyhja">
+                <strong>Tunnus kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="tunnuskirnum">
+                <strong>Tunnus saa olla vain kirjaimia ja numeroita!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="tunnuspitkalyhyt">
+                <strong>Tunnuksen pitää olla vähintään 4 merkkiä ja enintään 10!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="salasanatyhja">
+                <strong>Salasana kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="salasanakirnum">
+                <strong>Salasana saa olla vain kirjaimia ja numeroita!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="salasanapitkalyhyt">
+                <strong>Salasanan pitää olla vähintään 4 merkkiä ja enintään 10!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="salasana2tyhja">
+                <strong>Salasana uudelleen kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="puhnrotyhja">
+                <strong>Puhelinnumero kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="puhnroeinumero">
+                <strong>Puhelinnumero saa olla vain numeroita!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="puhnroliianpitka">
+                <strong>Puhelinnumero saa olla max 12 numeroa pitkä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="salasanaeitasma">
+                <strong>Salasanat eivät täsmää!</strong>
             </div>
             <label for="nimi">Nimi : </label>
-			<input type="text" id="nimi" name="nimi">
-
-            <br>
+			<input type="text" id="nimi" name="nimi" class="text ui-widget-content ui-corner-all">
 
 			<label for="osoite">Osoite : </label>
-			<input type="text" id="osoite" name="osoite">
+			<input type="text" id="osoite" name="osoite" class="text ui-widget-content ui-corner-all">
 
 			<label for="tunnus">Tunnus : </label>
-		    <input type="text" id="tunnus" name="tunnus">
+		    <input type="text" id="tunnus" name="tunnus" class="text ui-widget-content ui-corner-all">       
 
 			<label for="salasana">Salasana : </label>
-			<input type="password" id="salasana" name="salasana">
+			<input type="password" id="salasana" name="salasana" class="text ui-widget-content ui-corner-all">
 
             <label for="salasana2">Salasana uudelleen : </label>
-			<input type="password" id="salasana2" name="salasana2">
+			<input type="password" id="salasana2" name="salasana2" class="text ui-widget-content ui-corner-all">
 
 			<label for="puh">Puhelinnumero</label>
-			<input type="text" id="puh" name="puh">
+			<input type="text" id="puh" name="puh" class="text ui-widget-content ui-corner-all">
+
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 		</form> 
     </div>
 </div>
