@@ -1,0 +1,54 @@
+{{# if success }}
+{{ else }}
+<div class="container">
+    <header class="header">
+        <h1 id="otsikko">{{ title }}</h1>
+    </header>
+    <div class="row-2">
+        <form action="/signin" method="post" class="login-div">
+            {{# if errors }}
+            <section class="errors">
+                <ul>
+                    {{# each errors }}
+                    <li>{{ this.msg }}</li>
+                    <li>{{ message }}</li>
+                    {{/each}}
+                </ul>
+            </section>
+            {{/if}}
+            {{# if error }}
+            <section class="errors">
+                <p>{{ error }}</p>
+            </section>
+            {{/if}}
+            <h2 id="login-header">Kirjaudu sisään</h2>
+            <label for="username">Tunnus:</label>
+            <input class="input" type="text" name="username">
+            <label for="password">Salasana:</label>
+            <input class="input" type="password" name="password">
+            <button class="button-green" type="submit">Kirjaudu</button>
+            <a id="register-link" href="javascript:;">Rekisteröidy</a>
+        </form>
+    </div>
+    <div class="row-3">
+    </div>
+
+    <div id="dialog_rek">
+        <form id="form_rek" class="dialog-form">
+            <p><label for="NIMI">Nimi:</label><input type="text" name="NIMI"><label for="NIMI" class="error"></label></p>
+            <p><label for="OSOITE">Osoite:</label><input type="text" name="OSOITE"><label for="OSOITE" class="error"></label></p>
+            <p><label for="TUNNUS">Tunnus:</label><input type="text" name="TUNNUS"><label for="TUNNUS" class="error"></label></p>
+            <p><label for="PUHNRO">Puhelinnumero:</label><input type="text" name="PUHNRO"><label for="PUHNRO" class="error"></label></p>
+            <p><label for="SALASANA">Salasana:</label><input type="password" id="idsalasana" name="SALASANA"><label for="SALASANA" class="error"></label></p>
+            <p><label for="salasana2">Salasana uudelleen:</label><input type="password" id="idsalasana2" name="SALASANA2"><label for="SALASANA2" class="error"></label></p>
+            <p><button class="button-cancel" id="peruuta_rek">Peruuta</button><input class="button-confirm" type="submit" name="submit_rek" value="Rekisteröidy"></p>
+        </form>
+    </div>
+
+    <div id="dialog_success">
+        <section class="success">
+            <p>Rekisteröityminen onnistui! Nyt voit kirjautua sisään tunnuksillasi.</p>
+        </section>
+    </div>
+</div>
+{{/if}}
