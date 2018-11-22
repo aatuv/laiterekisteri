@@ -5,7 +5,7 @@
         <h1 id="otsikko">{{ title }}</h1>
     </header>
     <div class="row-2">
-        <form action="/signin" method="post" class="login-div">
+        <form action="/signin" method="post" class="login">
             {{# if errors }}
             <section class="errors">
                 <ul>
@@ -16,9 +16,9 @@
                 </ul>
             </section>
             {{/if}}
-            {{# if error }}
+             {{# if error }}
             <section class="errors">
-                <p>{{ error }}</p>
+               <p>{{ error }}</p>
             </section>
             {{/if}}
             <h2 id="login-header">Kirjaudu sisään</h2>
@@ -27,25 +27,80 @@
             <label for="password">Salasana:</label>
             <input class="input" type="password" name="password">
             <button class="button-green" type="submit">Kirjaudu</button>
-            <a id="register-link" href="javascript:;">Rekisteröidy</a>
+            <a id="register-link" href="#">Rekisteröidy</a>
         </form>
-    </div>
+    </div>  
     <div class="row-3">
     </div>
-
     <div id="dialog_rek">
-        <form id="form_rek" class="dialog-form">
-            <p><label for="NIMI">Nimi:</label><input type="text" name="NIMI"><label for="NIMI" class="error"></label></p>
-            <p><label for="OSOITE">Osoite:</label><input type="text" name="OSOITE"><label for="OSOITE" class="error"></label></p>
-            <p><label for="TUNNUS">Tunnus:</label><input type="text" name="TUNNUS"><label for="TUNNUS" class="error"></label></p>
-            <p><label for="PUHNRO">Puhelinnumero:</label><input type="text" name="PUHNRO"><label for="PUHNRO" class="error"></label></p>
-            <p><label for="SALASANA">Salasana:</label><input type="password" id="idsalasana" name="SALASANA"><label for="SALASANA" class="error"></label></p>
-            <p><label for="salasana2">Salasana uudelleen:</label><input type="password" id="idsalasana2" name="SALASANA2"><label for="SALASANA2" class="error"></label></p>
-            <p><button class="button-cancel" id="peruuta_rek">Peruuta</button><input class="button-confirm" type="submit" name="submit_rek" value="Rekisteröidy"></p>
-        </form>
-    </div>
+        <form id="rek_form" name="rek_form">
+            <div id="info_" class="alert alert-info alert-dismissible fade in" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" >&times;</a>
+                <strong>Kaikki kentät pakollisia!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="nimityhja">
+                <strong>Nimi kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="osoitetyhja">
+                <strong>Osoite kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="tunnustyhja">
+                <strong>Tunnus kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="tunnuskirnum">
+                <strong>Tunnus saa olla vain kirjaimia ja numeroita!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="tunnuspitkalyhyt">
+                <strong>Tunnuksen pitää olla vähintään 4 merkkiä ja enintään 10!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="salasanatyhja">
+                <strong>Salasana kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="salasanakirnum">
+                <strong>Salasana saa olla vain kirjaimia ja numeroita!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="salasanapitkalyhyt">
+                <strong>Salasanan pitää olla vähintään 4 merkkiä ja enintään 10!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="salasana2tyhja">
+                <strong>Salasana uudelleen kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="puhnrotyhja">
+                <strong>Puhelinnumero kenttä on tyhjä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="puhnroeinumero">
+                <strong>Puhelinnumero saa olla vain numeroita!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="puhnroliianpitka">
+                <strong>Puhelinnumero saa olla max 12 numeroa pitkä!</strong>
+            </div>
+            <div class="alert alert-danger collapse" role="alert" id="salasanaeitasma">
+                <strong>Salasanat eivät täsmää!</strong>
+            </div>
+            <label for="nimi">Nimi : </label>
+			<input type="text" id="nimi" name="nimi" class="text ui-widget-content ui-corner-all">
 
-    <div id="dialog_success">
+			<label for="osoite">Osoite : </label>
+			<input type="text" id="osoite" name="osoite" class="text ui-widget-content ui-corner-all">
+
+			<label for="tunnus">Tunnus : </label>
+		    <input type="text" id="tunnus" name="tunnus" class="text ui-widget-content ui-corner-all">       
+
+			<label for="salasana">Salasana : </label>
+			<input type="password" id="salasana" name="salasana" class="text ui-widget-content ui-corner-all">
+
+            <label for="salasana2">Salasana uudelleen : </label>
+			<input type="password" id="salasana2" name="salasana2" class="text ui-widget-content ui-corner-all">
+
+			<label for="puh">Puhelinnumero</label>
+			<input type="text" id="puh" name="puh" class="text ui-widget-content ui-corner-all">
+
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		</form> 
+    </div>
+</div>
+
+<div id="dialog_success">
         <section class="success">
             <p>Rekisteröityminen onnistui! Nyt voit kirjautua sisään tunnuksillasi.</p>
         </section>
