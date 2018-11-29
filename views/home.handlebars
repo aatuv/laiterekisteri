@@ -14,7 +14,11 @@
     <div id="omatvaraukset">
         <div>
             <h3>Omat varaukset ja lainaukset</h3>
-            ajalta: <input type="date"> - <input type="date"> <button class="button-green">Näytä</button>
+            <label for="alkupvm">Alkaen </label>
+            <input id="alkupvm" name="alkupvm" type="text">
+            <label for="loppupvm">Päättyen </label>
+            <input id="loppupvm" name="loppupvm" type="text">
+            <button id="nayta_varaukset" class="button-green">Näytä</button>
         </div>
         <table>
             <thead>
@@ -22,10 +26,10 @@
                     <th>Nimi</th>
                     <th>Merkki</th>
                     <th>Malli</th>
+                    <th>Sarjanumero</th>
                     <th>Sijainti</th>
                     <th>Omistaja</th>
                     <th>Kategoria</th>
-                    <th>Sarjanumero</th>
                     <th>Alkupäivämäärä</th>
                     <th>Loppupäivämäärä</th>
                     <th>Status</th>
@@ -33,66 +37,10 @@
                     <th>Toiminto</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Tulostin</td>
-                    <td>Canon</td>
-                    <td>Pixma TS8151</td>
-                    <td>Kuninkaankatu 5 A 10, Kuopio</td>
-                    <td>Matti mallikas</td>
-                    <td>Oheislaitteet</td>
-                    <td>59348285</td>
-                    <td>10.10.2018</td>
-                    <td>01.11.2018</td>
-                    <td>Palautettu</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Tulostin</td>
-                    <td>Canon</td>
-                    <td>Pixma TS8151</td>
-                    <td>Kuninkaankatu 5 A 10, Kuopio</td>
-                    <td>Matti mallikas</td>
-                    <td>Oheislaitteet</td>
-                    <td>59348285</td>
-                    <td>10.10.2018</td>
-                    <td>01.11.2018</td>
-                    <td>Palautettu</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Tulostin</td>
-                    <td>Canon</td>
-                    <td>Pixma TS8151</td>
-                    <td>Kuninkaankatu 5 A 10, Kuopio</td>
-                    <td>Matti mallikas</td>
-                    <td>Oheislaitteet</td>
-                    <td>59348285</td>
-                    <td>10.10.2018</td>
-                    <td>01.11.2018</td>
-                    <td>Palautettu</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Tulostin</td>
-                    <td>Canon</td>
-                    <td>Pixma TS8151</td>
-                    <td>Kuninkaankatu 5 A 10, Kuopio</td>
-                    <td>Matti mallikas</td>
-                    <td>Oheislaitteet</td>
-                    <td>59348285</td>
-                    <td>10.10.2018</td>
-                    <td>01.11.2018</td>
-                    <td>Palautettu</td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            <tbody id="table_varaukset">
             </tbody>
         </table>
-        <button id="varaa" class="button-green">Varaa</button>
+        <button id="uusi_varaus" class="button-green">Varaa</button>
     </div>
     <div id="varaaLaite">
         <div id="hakuehdot">
@@ -100,10 +48,10 @@
             <input type="text" name="NIMI"> 
             <input type="text" name="MERKKI"> 
             <input type="text" name="MALLI">
+            <input type="text" name="SARJANUMERO">
             <input type="text" name="SIJAINTI">
             <input type="text" name="OMISTAJA">
             <select name="NIMI"></select>
-            <input type="text" name="SARJANUMERO">
             <button class="button-green">Hae</button>
         </div>
         <table>
@@ -135,12 +83,45 @@
     </div>
         <div id="dialog_muuta">
         <form id="form_muuta" class="dialog-form">
-            <p><label for="NIMI">Nimi:</label><input type="text" id="nimi" name="NIMI"><label for="NIMI" class="error"></label></p>
-            <p><label for="OSOITE">Osoite:</label><input type="text" id="osoite" name="OSOITE"><label for="OSOITE" class="error"></label></p>
-            <p><label for="PUHNRO">Puhelinnumero:</label><input type="text" id="puh" name="PUHNRO"><label for="PUHNRO" class="error"></label></p>
-            <p><label for="SALASANA">Uusi salasana:</label><input type="password" id="idsalasana" name="SALASANA"><label for="SALASANA" class="error"></label></p>
-            <p><label for="salasana2">Uusi salasana uudelleen:</label><input type="password" id="idsalasana2" name="SALASANA2"><label for="SALASANA2" class="error"></label></p>
-            <p><button class="button-cancel" id="peruuta_muuta">Peruuta</button><input class="button-confirm" type="submit" name="submit_muuta" value="Vahvista"></p>
+            <p>
+                <label for="NIMI">Nimi:</label>
+                <input type="text" id="nimi" name="NIMI">
+                <label for="NIMI" class="error"></label>
+            </p>
+            <p>
+                <label for="OSOITE">Osoite:</label>
+                <input type="text" id="osoite" name="OSOITE">
+                <label for="OSOITE" class="error"></label>
+            </p>
+            <p>
+                <label for="PUHNRO">Puhelinnumero:</label>
+                <input type="text" id="puh" name="PUHNRO">
+                <label for="PUHNRO" class="error"></label>
+            </p>
+            <p id="ptunnus">
+                <label for="TUNNUS">Tunnus:</label>
+                <input type="text" id="tunnus" name="TUNNUS">
+                <label for="TUNNUS" class="error"></label>
+            </p>
+            <p>
+                <label for="SALASANA">Uusi salasana:</label>
+                <input type="password" id="idsalasana" name="SALASANA">
+                <label for="SALASANA" class="error"></label>
+            </p>
+            <p>
+                <label for="salasana2">Uusi salasana uudelleen:</label>
+                <input type="password" id="idsalasana2" name="SALASANA2">
+                <label for="SALASANA2" class="error"></label>
+            </p>
+            <p>
+                <button class="button-cancel" id="peruuta_muuta">Peruuta</button>
+                <input class="button-confirm" type="submit" name="submit_muuta" value="Vahvista">
+            </p>
         </form>
+    </div>
+    <div id="dialog_success">
+        <section class="success">
+            <p>Tietojen muuttaminen onnistui.</p>
+        </section>
     </div>
 </div>

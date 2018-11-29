@@ -242,6 +242,9 @@ tr:nth-child(even) {background-color: #999898;}
     background-color: #a8a6a6;
     color: rgb(255, 255, 255);
 }
+#ptunnus {
+    visibility: hidden;
+}
 .dialog-form {
     display: table;
     font-size: 1.25em;

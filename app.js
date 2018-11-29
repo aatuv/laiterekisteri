@@ -13,8 +13,9 @@ require('./config/passport')(passport);
 
 
 // reititykset
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var users = require('./routes/users');
+var gadgets = require('./routes/gadgets');
 
 var app = express();
 
@@ -45,8 +46,9 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', routes);
+app.use('/', index);
 app.use('/', users);
+app.use('/', gadgets);
 
 
 // 404

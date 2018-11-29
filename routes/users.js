@@ -21,7 +21,6 @@ router.post('/signin', (req, res, info) => {
             failureRedirect: '/login',
             failureFlash: true
         })(req, res);
-        console.log(req.user);
     }
 });
 
@@ -33,6 +32,7 @@ router.get('/current_user', (req, res) => {
     } else {
         res.json(
             {
+                username: req.user.TUNNUS,
                 name: req.user.NIMI,
                 address: req.user.OSOITE,
                 telephone: req.user.PUHNRO
@@ -42,7 +42,6 @@ router.get('/current_user', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    console.log("/logout kutsuttu ");
     req.logout();
     res.redirect('/login');
 });
@@ -50,5 +49,6 @@ router.get('/logout', (req, res) => {
 router.route('/signup').post(kayttajaController.registeration);
 router.route('/checkuser').get(kayttajaController.checkIfUserExists);
 router.route('/user').get(kayttajaController.fetchUser);
+router.route('/updateuser').put(kayttajaController.updateUserInformation);
 
 module.exports = router;
