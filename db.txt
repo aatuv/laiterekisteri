@@ -51,10 +51,10 @@ CREATE TABLE IF NOT EXISTS `laite` (
   `NIMI` varchar(50) CHARACTER SET latin1 NOT NULL,
   `MERKKI` varchar(50) CHARACTER SET latin1 NOT NULL,
   `MALLI` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `SARJANRO` varchar(40) NOT NULL,
   `SIJAINTI` varchar(50) CHARACTER SET latin1 NOT NULL,
   `OMISTAJA_ID` int(11) NOT NULL,
   `KATEGORIA_ID` int(11) NOT NULL,
-  `SARJANRO` int(11) NOT NULL,
   PRIMARY KEY (`LAITE_ID`),
   CONSTRAINT FK_Omistaja FOREIGN KEY (`OMISTAJA_ID`)
   REFERENCES `omistaja`(`OMISTAJA_ID`),
@@ -72,7 +72,7 @@ VALUES
  'Puijonkatu 16', 
 (SELECT `OMISTAJA_ID` FROM `omistaja` WHERE `NIMI` = 'Pekka Kauppinen'),
 (SELECT `KATEGORIA_ID` FROM `kategoria` WHERE `SELITE` = 'TIETOKONEET'), 
-340938209);
+'340938209');
 
 -- --------------------------------------------------------
 
@@ -83,18 +83,26 @@ CREATE TABLE IF NOT EXISTS `kayttaja`(
     `OSOITE` varchar(50) CHARACTER SET latin1 NOT NULL,
     `TUNNUS` varchar(50) CHARACTER SET latin1 NOT NULL,
     `SALASANA` varchar(50) CHARACTER SET latin1 NOT NULL,
-    `PUHNRO` int(11) NOT NULL,
+    `PUHNRO` varchar(10) NOT NULL,
     PRIMARY KEY (`KAYTTAJA_ID`),
     UNIQUE KEY (`TUNNUS`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
     
     INSERT INTO `kayttaja`(`NIMI`, `OSOITE`, `TUNNUS`, `SALASANA`, `PUHNRO`)
     VALUES
-    ('Pertti Kumpulainen', 
-     'Satamakatu 8 A 3', 
-     'pege69', 
-     'saippuakauppias1', 
-     040553926
+    (
+        'administrator', 
+        'administrator', 
+        'admin', 
+        'admin', 
+        '1234567899'
+    ),
+    (
+        'Joni Turpeinen',
+        'Mallikuja 12 A 9',
+        'jonne',
+        'asdd',
+        '050392658'
     );
 	
 -- ----------------------------------------------------------
@@ -120,9 +128,9 @@ CREATE TABLE IF NOT EXISTS `varaus` (
 INSERT INTO `varaus` (`LAITE_ID`, `KAYTTAJA_ID`, `ALKUPVM`, `LOPPUPVM`, `STATUS_ID`) 
 VALUES
 (
- (SELECT `LAITE_ID`FROM `laite` WHERE `SARJANRO` = 340938209),
- (SELECT `KAYTTAJA_ID`FROM `kayttaja` WHERE `TUNNUS` = 'pege69'),
- '2018-11-13', 
+ (SELECT `LAITE_ID`FROM `laite` WHERE `SARJANRO` = '340938209'),
+ (SELECT `KAYTTAJA_ID`FROM `kayttaja` WHERE `TUNNUS` = 'jonne'),
+ '2018-11-01', 
  '2018-11-30', 
  (SELECT `STATUS_ID`FROM `status` WHERE `KUVAUS` = 'VARAUS')
 );
