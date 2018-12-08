@@ -14,7 +14,11 @@ PRIMARY KEY (`OMISTAJA_ID`)
 
 INSERT INTO `omistaja` (`NIMI`) 
 VALUES
-('Pekka Kauppinen');
+('Pekka Kauppinen'),
+('Antti Laakso'),
+('Heidi Ripatti'),
+('Tomi Heikkinen'),
+('Anna Auvinen');
 -- --------------------------------------------------------
 
 DROP TABLE IF EXISTS `kategoria`;
