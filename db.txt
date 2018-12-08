@@ -30,7 +30,11 @@ PRIMARY KEY (`KATEGORIA_ID`)
 
 INSERT INTO `kategoria` (`SELITE`) 
 VALUES
-('TIETOKONEET');
+('VIIHDE-ELEKTRONIIKKA'),
+('TIETOKONEET'),
+('TOIMISTO'),
+('PUUTARHA'),
+('RAKENTAMINEN');
 -- --------------------------------------------------------
 
 DROP TABLE IF EXISTS `status`;
@@ -72,7 +76,7 @@ VALUES
 ('KANNETTAVA TIETOKONE', 
  'HP', 
  'ENVY', 
- 'Puijonkatu 16', 
+ 'Puijonkatu 16, Kuopio', 
 (SELECT `OMISTAJA_ID` FROM `omistaja` WHERE `NIMI` = 'Pekka Kauppinen'),
 (SELECT `KATEGORIA_ID` FROM `kategoria` WHERE `SELITE` = 'TIETOKONEET'),
 '340938209');
