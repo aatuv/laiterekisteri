@@ -40,8 +40,7 @@ INSERT INTO `status` (`STATUS_ID`,`KUVAUS`)
 VALUES
 (1, 'LAINA'),
 (2, 'VARAUS'),
-(3, 'PALAUTETTU'),
-(4, 'VAPAA');
+(3, 'VAPAA');
 
 -- -------------------------------------------------------
 
@@ -71,7 +70,7 @@ VALUES
  'ENVY', 
  'Puijonkatu 16', 
 (SELECT `OMISTAJA_ID` FROM `omistaja` WHERE `NIMI` = 'Pekka Kauppinen'),
-(SELECT `KATEGORIA_ID` FROM `kategoria` WHERE `SELITE` = 'TIETOKONEET'), 
+(SELECT `KATEGORIA_ID` FROM `kategoria` WHERE `SELITE` = 'TIETOKONEET'),
 '340938209');
 
 -- --------------------------------------------------------
