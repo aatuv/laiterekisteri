@@ -1,3 +1,186 @@
+{{#if admin}} <!--ADMIN !-->
+<div class="wrapper">
+    <div class="navbar">
+        <ul>
+            <li class="highlight">
+                <p>Kirjautuneena: {{ username }}</p>
+            </li>
+            <li><a id="a_logout" href="http://localhost:3001/logout">Kirjaudu ulos</a></li>
+        </ul>
+    </div>
+    <header class="header">
+        <h1 id="otsikko">{{ title }}</h1>
+    </header>
+    <div id="kaikkivaraukset">
+        <div>
+            <h3>Kaikki varaukset ja lainaukset</h3>
+            <label for="alkupvm">Alkaen </label>
+            <input id="alkupvm" name="alkupvm" type="text">
+            <label for="loppupvm">Päättyen </label>
+            <input id="loppupvm" name="loppupvm" type="text">
+            <button id="nayta_adminvar" class="button-green">Näytä</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Käyttäjätunnus</th>
+                    <th>Nimi</th>
+                    <th>Merkki</th>
+                    <th>Malli</th>
+                    <th>Sarjanumero</th>
+                    <th>Sijainti</th>
+                    <th>Omistaja</th>
+                    <th>Kategoria</th>
+                    <th>Alkupäivämäärä</th>
+                    <th>Loppupäivämäärä</th>
+                    <th>Status</th>
+                    <th>Toiminto</th>
+                    <th>Toiminto</th>
+                </tr>
+            </thead>
+            <tbody id="table_ adminvar">
+            </tbody>
+        </table>
+    </div>
+    <div id="Laitteet">
+        <h3>Kaikki laitteet</h3>
+        <h4>Hakuehdot:</h4>
+        <div id="hakuehdot">
+            <label for="NIMI">Nimi: </label>
+            <input id="NIMI" type="text" name="NIMI">
+            <label for="MERKKI">Merkki: </label>
+            <input id="MERKKI" type="text" name="MERKKI">
+            <label for="MALLI">Malli: </label>
+            <input id="MALLI" type="text" name="MALLI">
+            <label for="SARJANRO">Sarjanumero: </label>
+            <input id="SARJANRO" type="text" name="SARJANRO">
+            <label for="SIJAINTI">Sijainti: </label>
+            <input id="SIJAINTI" type="text" name="SIJAINTI">
+            <label for="OMISTAJA">Omistaja: </label>
+            <select id="select_omistaja" name="OMISTAJA">
+                <option></option>
+            </select>
+            <label for="KATEGORIA">Kategoria: </label>
+            <select id="select_kategoria" name="KATEGORIA">
+                <option></option>
+            </select>
+            <button id="admin_hae_laitteet" class="button-green">Hae</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nimi</th>
+                    <th>Merkki</th>
+                    <th>Malli</th>
+                    <th>Sarjanumero</th>
+                    <th>Sijainti</th>
+                    <th>Omistaja</th>
+                    <th>Kategoria</th>
+                    <th>Toiminto</th>
+                    <th>Toiminto</th>
+                </tr>
+            </thead>
+            <tbody id="table_adminlai">
+            </tbody>
+        </table>
+        <button id="lisaa_laite" class="button-green">Lisää laite</button>
+    </div>
+    <div id="dialog_lisaaLaite">
+        <form id="form_lisaaLaite" class="dialog-form">
+            <p>
+                <label for="NIMI">Nimi:</label>
+                <input type="text" id="lisaanimi" name="NIMI">
+                <label for="NIMI" class="error"></label>
+            </p>
+            <p>
+                <label for="MERKKI">Merkki:</label>
+                <input type="text" id="lisaamerkki" name="MERKKI">
+                <label for="MERKKI" class="error"></label>
+            </p>
+            <p>
+                <label for="MALLI">Malli:</label>
+                <input type="text" id="lisaamalli" name="MALLI">
+                <label for="MALLI" class="error"></label>
+            </p>
+            <p>
+                <label for="SARJANRO">Sarjanumero:</label>
+                <input type="text" id="lisaasarjanro" name="SARJANRO">
+                <label for="SARJANRO" class="error"></label>
+            </p>
+            <p>
+                <label for="SIJAINTI">Sijainti:</label>
+                <input type="text" id="lisaasijainti" name="SIJAINTI">
+                <label for="SIJAINTI" class="error"></label>
+            </p>
+            <p>
+                <label for="OMISTAJA_ID">Omistaja:</label>
+                <select id="dselect_omistaja" name="OMISTAJA_ID">
+                    <option></option>
+                </select>
+                <label for="OMISTAJA" class="error"></label>
+            </p>
+            <p>
+                <label for="KATEGORIA_ID">Kategoria:</label>
+                <select id="dselect_kategoria" name="KATEGORIA_ID">
+                    <option></option>
+                </select>
+                <label for="KATEGORIA_ID" class="error"></label>
+            </p>
+            <p>
+                <button class="button-cancel" id="peruuta_lisaaLaite">Peruuta</button>
+                <input class="button-confirm" type="submit" name="submit_lisaaLaite" value="Vahvista">
+            </p>
+        </form>
+    </div>
+    <div id="dialog_muokkaaLaite">
+        <form id="form_muokkaaLaite" class="dialog-form">
+            <p>
+                <label for="NIMI">Nimi:</label>
+                <input type="text" id="muokkaanimi" name="NIMI">
+                <label for="NIMI" class="error"></label>
+            </p>
+            <p>
+                <label for="MERKKI">Merkki:</label>
+                <input type="text" id="muokkaamerkki" name="MERKKI">
+                <label for="MERKKI" class="error"></label>
+            </p>
+            <p>
+                <label for="MALLI">Malli:</label>
+                <input type="text" id="muokkaamalli" name="MALLI">
+                <label for="MALLI" class="error"></label>
+            </p>
+            <p>
+                <label for="SARJANRO">Sarjanumero:</label>
+                <input type="text" id="muokkaasarjanro" name="SARJANRO">
+                <label for="SARJANRO" class="error"></label>
+            </p>
+            <p>
+                <label for="SIJAINTI">Sijainti:</label>
+                <input type="text" id="muokkaasijainti" name="SIJAINTI">
+                <label for="SIJAINTI" class="error"></label>
+            </p>
+            <p>
+                <label for="OMISTAJA">Omistaja:</label>
+                <select id="dmselect_omistaja" name="OMISTAJA">
+                    <option></option>
+                </select>
+                <label for="OMISTAJA" class="error"></label>
+            </p>
+            <p>
+                <label for="KATEGORIA">Kategoria:</label>
+                <select id="dmselect_kategoria" name="KATEGORIA">
+                    <option></option>
+                </select>
+                <label for="KATEGORIA_ID" class="error"></label>
+            </p>
+            <p>
+                <button class="button-cancel" id="peruuta_muokkaaLaite">Peruuta</button>
+                <input class="button-confirm" type="submit" name="submit_muokkaaLaite" value="Vahvista">
+            </p>
+        </form>
+    </div>
+</div>
+{{else}} <!-- PERUSKÄYTTÄJÄ !-->
 <div class="wrapper">
     <div class="navbar">
         <ul>
@@ -34,19 +217,17 @@
                     <th>Loppupäivämäärä</th>
                     <th>Status</th>
                     <th>Toiminto</th>
-                    <th>Toiminto</th>
                 </tr>
             </thead>
             <tbody id="table_varaukset">
             </tbody>
         </table>
-        <button id="uusi_varaus" class="button-green">Varaa</button>
     </div>
     <div id="varaaLaite">
         <div id="hakuehdot">
             <label for="NIMI">Nimi: </label>
-            <input type="text" name="NIMI"> 
-            <input type="text" name="MERKKI"> 
+            <input type="text" name="NIMI">
+            <input type="text" name="MERKKI">
             <input type="text" name="MALLI">
             <input type="text" name="SARJANUMERO">
             <input type="text" name="SIJAINTI">
@@ -67,21 +248,11 @@
                     <th>Toiminto</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Tulostin</td>
-                    <td>Canon</td>
-                    <td>Pixma TS8151</td>
-                    <td>Kuninkaankatu 5 A 10, Kuopio</td>
-                    <td>Matti mallikas</td>
-                    <td>Oheislaitteet</td>
-                    <td>59348285</td>
-                    <td></td>
-                </tr>
+            <tbody id="table_lai">
             </tbody>
         </table>
     </div>
-        <div id="dialog_muuta">
+    <div id="dialog_muuta">
         <form id="form_muuta" class="dialog-form">
             <p>
                 <label for="NIMI">Nimi:</label>
@@ -125,3 +296,4 @@
         </section>
     </div>
 </div>
+{{/if}}

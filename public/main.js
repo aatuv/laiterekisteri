@@ -1,75 +1,13 @@
-function haeKaikkiVaraukset(TUNNUS) {
-    $.ajax(
-        {
-            url: 'http://localhost:3001/myreservations_all',
-            method: 'GET',
-            data: {TUNNUS: TUNNUS},
-            dataType: 'json',
-            success: (data) => {
-                console.log(data);
-                var varaukset = JSON.parse(JSON.stringify(data));
-                for (let i = 0; i < varaukset.length; i++) {
-                    $("#table_varaukset").append(
-                        "<tr>" +
-                        "<td>" + varaukset[i]["NIMI"] + "</td>" +
-                        "<td>" + varaukset[i]["MERKKI"] + "</td>" +
-                        "<td>" + varaukset[i]["MALLI"] + "</td>" +
-                        "<td>" + varaukset[i]["SARJANUMERO"] + "</td>" +
-                        "<td>" + varaukset[i]["SIJAINTI"] + "</td>" +
-                        "<td>" + varaukset[i]["OMISTAJA"] + "</td>" +
-                        "<td>" + varaukset[i]["KATEGORIA"] + "</td>" +
-                        "<td>" + varaukset[i]["ALKUPVM"] + "</td>" +
-                        "<td>" + varaukset[i]["LOPPUPVM"] + "</td>" +
-                        "<td>" + varaukset[i]["STATUS"] + "</td>" +
-                        "</tr>"
-                    );
-                }
-            }
-        }
-    ).fail((textStatus) => {
-        console.log(textStatus);
-    });
-}
-function haeVarauksetAjalta(TUNNUS, ALKUPVM, LOPPUPVM) {
-    $.ajax(
-        {
-            url: 'http://localhost:3001/myreservations_fromto',
-            method: 'GET',
-            data: {
-                TUNNUS: TUNNUS,
-                ALKUPVM: ALKUPVM,
-                LOPPUPVM: LOPPUPVM
-            },
-            dataType: 'json',
-            success: (data) => {
-                console.log(data);
-                var varaukset = JSON.parse(JSON.stringify(data));
-                for (let i = 0; i < varaukset.length; i++) {
-                    $("#table_varaukset").append(
-                        "<tr>" +
-                        "<td>" + varaukset[i]["NIMI"] + "</td>" +
-                        "<td>" + varaukset[i]["MERKKI"] + "</td>" +
-                        "<td>" + varaukset[i]["MALLI"] + "</td>" +
-                        "<td>" + varaukset[i]["SARJANUMERO"] + "</td>" +
-                        "<td>" + varaukset[i]["SIJAINTI"] + "</td>" +
-                        "<td>" + varaukset[i]["OMISTAJA"] + "</td>" +
-                        "<td>" + varaukset[i]["KATEGORIA"] + "</td>" +
-                        "<td>" + varaukset[i]["ALKUPVM"] + "</td>" +
-                        "<td>" + varaukset[i]["LOPPUPVM"] + "</td>" +
-                        "<td>" + varaukset[i]["STATUS"] + "</td>" +
-                        "</tr>"
-                    );
-                }
-            }
-        }
-    ).fail((textStatus) => {
-        console.log(textStatus);
-    });
-}
-
 $(document).ready(() => {
+
+    // /myfunctions.js
+    haeOmistajatJaKategoriat();
+
+    $("#table_adminlai").ready(() => {
+        $("#admin_hae_laitteet").click();
+    });
     $("#table_varaukset").ready(() => {
-        var TUNNUS; 
+        var TUNNUS;
         $.getJSON("http://localhost:3001/current_user", (data) => {
             if (data.hasOwnProperty('username')) {
                 TUNNUS = data.username;
@@ -92,202 +30,6 @@ $(document).ready(() => {
             }
         });
     })
-
-    $("#form_rek").validate({
-        rules:
-        {
-            NIMI: {
-                required: true,
-                minlength: 4,
-                maxlength: 40
-            },
-            OSOITE: {
-                required: true,
-                minlength: 4,
-                maxlength: 40
-            },
-            TUNNUS: {
-                required: true,
-                minlength: 3,
-                maxlength: 15,
-                remote: 'http://localhost:3001/checkuser'
-
-            },
-            PUHNRO: {
-                required: true,
-                digits: true,
-                minlength: 6,
-                maxlength: 20
-            },
-            SALASANA: {
-                required: true,
-                minlength: 4
-            },
-            SALASANA2: {
-                required: true,
-                equalTo: "#idsalasana"
-            }
-        },
-
-        messages:
-        {
-            NIMI: {
-                required: "Syötä nimi.",
-                minlength: "Nimen tulee olla vähintään 4 merkkiä pitkä.",
-                maxlength: "Nimi saa olla enintään 40 merkkiä pitkä."
-            },
-            OSOITE: {
-                required: "Syötä osoite.",
-                minlength: "Osoitteen tulee olla vähintään 4 merkkiä pitkä.",
-                maxlength: "Osoitteen saa olla enintään 40 merkkiä pitkä."
-            },
-            TUNNUS: {
-                required: "Syötä tunnus.",
-                minlength: "Tunnuksen tulee olla vähintään 3 merkkiä pitkä.",
-                maxlength: "Tunnus saa olla enintään 20 merkkiä pitkä.",
-                remote: "Syöttämäsi tunnus on jo käytössä!"
-            },
-            PUHNRO: {
-                required: "Syötä puhelinnumero.",
-                digits: "Puhelinnumero saa sisältää vain numeroita.",
-                minlength: "Puhelinnumeron tulee olla vähintään 6 merkkiä pitkä.",
-                maxlength: "Puhelinnumeron saa olla enintään 15 merkkiä pitkä."
-            },
-            SALASANA: {
-                required: "Syötä salasana.",
-                minlength: "Salasanan tulee olla vähintään 4 merkkiä pitkä."
-            },
-            SALASANA2: {
-                required: "Vahvista syöttämäsi salasana.",
-                equalTo: "Salasanat eivät ole yhteneviä."
-            }
-        },
-
-        submitHandler: (form) => {
-            var str = $("#form_rek").serialize();
-            $.ajax(
-                {
-                    url: "http://localhost:3001/signup",
-                    method: 'POST',
-                    data: str,
-                    success: (data) => {
-                        console.log(data.sqlMessage);
-                    }
-                }
-            ).fail((textStatus) => {
-                console.log(textStatus);
-            });
-
-            $("#dialog_rek").dialog("close");
-            $("#dialog_success").dialog("open");
-        }
-    });
-
-    $("#form_muuta").validate({
-        rules:
-        {
-            NIMI: {
-                required: true,
-                minlength: 4,
-                maxlength: 40
-            },
-            OSOITE: {
-                required: true,
-                minlength: 4,
-                maxlength: 40
-            },
-            PUHNRO: {
-                required: true,
-                digits: true,
-                minlength: 6,
-                maxlength: 20
-            },
-            SALASANA: {
-                required: true,
-                minlength: 4
-            },
-            SALASANA2: {
-                required: true,
-                equalTo: "#idsalasana"
-            }
-        },
-
-        messages:
-        {
-            NIMI: {
-                required: "Syötä nimi.",
-                minlength: "Nimen tulee olla vähintään 4 merkkiä pitkä.",
-                maxlength: "Nimi saa olla enintään 40 merkkiä pitkä."
-            },
-            OSOITE: {
-                required: "Syötä osoite.",
-                minlength: "Osoitteen tulee olla vähintään 4 merkkiä pitkä.",
-                maxlength: "Osoitteen saa olla enintään 40 merkkiä pitkä."
-            },
-            PUHNRO: {
-                required: "Syötä puhelinnumero.",
-                digits: "Puhelinnumero saa sisältää vain numeroita.",
-                minlength: "Puhelinnumeron tulee olla vähintään 6 merkkiä pitkä.",
-                maxlength: "Puhelinnumeron saa olla enintään 15 merkkiä pitkä."
-            },
-            SALASANA: {
-                required: "Syötä salasana.",
-                minlength: "Salasanan tulee olla vähintään 4 merkkiä pitkä."
-            },
-            SALASANA2: {
-                required: "Vahvista syöttämäsi salasana.",
-                equalTo: "Salasanat eivät ole yhteneviä."
-            }
-        },
-
-        submitHandler: (form) => {
-            var str = $("#form_muuta").serialize();
-            console.log(str);
-            $.ajax(
-                {
-                    url: "http://localhost:3001/updateuser",
-                    method: 'PUT',
-                    data: str,
-                    success: (data) => {
-                        console.log(data.sqlMessage);
-                        console.log(data);
-                    }
-                }
-            ).fail((textStatus) => {
-                console.log(textStatus);
-            });
-
-            $("#dialog_muuta").dialog("close");
-            $("#dialog_success").dialog("open");
-        }
-    });
-
-    $("#dialog_rek").dialog({
-        autoOpen: false,
-        closeOnEscape: true,
-        draggable: false,
-        modal: true,
-        title: "Rekisteröityminen",
-        height: 700,
-        width: 1100
-    });
-    $("#dialog_success").dialog({
-        autoOpen: false,
-        modal: true,
-        buttons: {
-            "OK": () => {
-                $("#dialog_success").dialog("close");
-            }
-        }
-    })
-    $("#dialog_muuta").dialog({
-        autoOpen: false,
-        closeOnEscape: true,
-        modal: true,
-        title: "Muuta tietoja",
-        height: 700,
-        width: 1100
-    });
 
     $("#peruuta_rek").click(() => {
         $("#dialog_rek").dialog("close");
@@ -319,21 +61,21 @@ $(document).ready(() => {
         return false;
     });
 
-    $(function() {
+    $(() => {
         alkaen = $("#alkupvm").datepicker({
-            dateFormat :"dd/mm/yy",
+            dateFormat: "dd/mm/yy",
             changeMonth: true
         })
-        .on("change", () => {
-            paattyen.datepicker("option", "minDate", getDate(this));
-        }),
-        paattyen = $("#loppupvm").datepicker({
-            dateFormat :"dd/mm/yy",
-            changeMonth: true
-        })
-        .on("change", () => {
-            alkaen.datepicker("option", "maxDate", getDate(this));
-        });
+            .on("change", () => {
+                paattyen.datepicker("option", "minDate", getDate(this));
+            }),
+            paattyen = $("#loppupvm").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true
+            })
+                .on("change", () => {
+                    alkaen.datepicker("option", "maxDate", getDate(this));
+                });
 
         function getDate(element) {
             var date;
@@ -344,5 +86,166 @@ $(document).ready(() => {
             }
             return date;
         }
+    });
+
+    $("#admin_hae_laitteet").click(() => {
+        $("#table_adminlai td").parent().remove();
+        $.ajax(
+            {
+                url: 'http://localhost:3001/admin_gadgets',
+                method: 'GET',
+                data: {
+                    NIMI: $("#NIMI").val(),
+                    MERKKI: $("#MERKKI").val(),
+                    MALLI: $("#MALLI").val(),
+                    SARJANRO: $("#SARJANRO").val(),
+                    SIJAINTI: $("#SIJAINTI").val(),
+                    OMISTAJA_ID: $("#select_omistaja").val(),
+                    KATEGORIA_ID: $("#select_kategoria").val()
+                },
+                dataType: 'json',
+                success: (data) => {
+                    var laitteet = JSON.parse(JSON.stringify(data));
+                    for (let i = 0; i < laitteet.length; i++) {
+                        $("#table_adminlai").append(
+                            "<tr>" +
+                            "<td>" + laitteet[i]["NIMI"] + "</td>" +
+                            "<td>" + laitteet[i]["MERKKI"] + "</td>" +
+                            "<td>" + laitteet[i]["MALLI"] + "</td>" +
+                            "<td>" + laitteet[i]["SARJANRO"] + "</td>" +
+                            "<td>" + laitteet[i]["SIJAINTI"] + "</td>" +
+                            "<td>" + laitteet[i]["OMISTAJA"] + "</td>" +
+                            "<td>" + laitteet[i]["KATEGORIA"] + "</td>" +
+                            '<td><button id="muokkaa_laite" class="button-green" value="' + laitteet[i]["LAITE_ID"] + '">Muokkaa</button>' +
+                            '<td><button id="poista_laite" class="button-cancel" value="' + laitteet[i]["LAITE_ID"] + '">Poista</button>' +
+                            "</tr>"
+                        );
+                    }
+                }
+            }
+        ).fail((textStatus) => {
+            console.log(textStatus);
+        });
+    })
+
+    $("#lisaa_laite").click(() => {
+
+        // nollataan dialogin kenttien arvot
+        $("#lisaanimi").val("");
+        $("#lisaamerkki").val("");
+        $("#lisaamalli").val("");
+        $("#lisaasarjanro").val("");
+        $("#lisaasijainti").val("");
+        $("#dselect_omistaja").val("");
+        $("#dselect_kategoria").val("");
+        // avataan dialogi
+        $("#dialog_lisaaLaite").dialog("open");
+        var omistajat = [];
+        var kategoriat = [];
+        $.ajax(
+            {
+                url: "http://localhost:3001/fetch_owners",
+                method: 'GET',
+                success: function (data) {
+                    omistajat = JSON.parse(JSON.stringify(data));
+                    console.log(omistajat);
+                    for (let i = 0; i < omistajat.length; i++) {
+                        $("#dselect_omistaja option:last").after('<option value="' + omistajat[i]["OMISTAJA_ID"] + '">' + omistajat[i]["NIMI"] + '</option>');
+                    }
+                }
+            }
+        )
+        $.ajax(
+            {
+                url: "http://localhost:3001/fetch_categories",
+                method: 'GET',
+                success: function (data) {
+                    kategoriat = JSON.parse(JSON.stringify(data));
+                    console.log(kategoriat);
+                    for (let i = 0; i < kategoriat.length; i++) {
+                        $("#dselect_kategoria option:last").after('<option value="' + kategoriat[i]["KATEGORIA_ID"] + '">' + kategoriat[i]["SELITE"] + '</option>');
+                    }
+                }
+            }
+        )
+    });
+
+    $("#peruuta_lisaaLaite").click(() => {
+        $("#dialog_lisaaLaite").dialog("close");
+        $("#dselect_omistaja").empty();
+        $("#dselect_kategoria").empty();
+        return false;
+    });
+
+    $(document).on("click", "[id^='muokkaa_laite']", (event) => {
+        let laiteid = event.target.value;
+        let laite = [];
+        $("#dialog_muokkaaLaite").dialog("open");
+        $.ajax(
+            {
+                url: "http://localhost:3001/thisgadget",
+                method: 'GET',
+                data: { LAITE_ID: laiteid },
+                success: (data) => {
+                    laite = JSON.parse(JSON.stringify(data));
+                    $("#muokkaanimi").val(laite[0]["NIMI"]);
+                    $("#muokkaamerkki").val(laite[0]["MERKKI"]);
+                    $("#muokkaamalli").val(laite[0]["MALLI"]);
+                    $("#muokkaasarjanro").val(laite[0]["SARJANRO"]);
+                    $("#muokkaasijainti").val(laite[0]["SIJAINTI"]);
+                    $("#dmselect_omistaja").val(laite[0]["OMISTAJA_ID"]);
+                    $("#dmselect_kategoria").val(laite[0]["KATEGORIA_ID"]);
+
+                }
+            }
+        )
+        $.ajax(
+            {
+                url: "http://localhost:3001/fetch_owners",
+                method: 'GET',
+                success: function (data) {
+                    omistajat = JSON.parse(JSON.stringify(data));
+                    console.log(omistajat);
+                    for (let i = 0; i < omistajat.length; i++) {
+                        $("#dmselect_omistaja option:last").after('<option value="' + omistajat[i]["OMISTAJA_ID"] + '">' + omistajat[i]["NIMI"] + '</option>');
+                    }
+                }
+            }
+        )
+        $.ajax(
+            {
+                url: "http://localhost:3001/fetch_categories",
+                method: 'GET',
+                success: function (data) {
+                    kategoriat = JSON.parse(JSON.stringify(data));
+                    console.log(kategoriat);
+                    for (let i = 0; i < kategoriat.length; i++) {
+                        $("#dmselect_kategoria option:last").after('<option value="' + kategoriat[i]["KATEGORIA_ID"] + '">' + kategoriat[i]["SELITE"] + '</option>');
+                    }
+                }
+            }
+        )
+    });
+
+    $(document).on("click", "[id^='poista_laite']", (event) => {
+        let LAITE_ID = event.target.value;
+        console.log(LAITE_ID);
+        $.ajax(
+            {
+                url: "http://localhost:3001/delete_gadget/" + LAITE_ID,
+                method: 'DELETE',
+                success: function (data) {
+                    res.send('success');
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            }
+        )
+        $("#admin_hae_laitteet").click();
+    });
+    $("#peruuta_muokkaaLaite").click(() => {
+        $("#dialog_muokkaaLaite").dialog("close");
+        return false;
     });
 });

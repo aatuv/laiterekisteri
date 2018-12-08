@@ -20,7 +20,19 @@ var gadgets = require('./routes/gadgets');
 var app = express();
 
 // handlebarsin asettaminen view engineksi
-app.engine('.handlebars', exhbs({extname: '.handlebars', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/'}));
+app.engine('.handlebars', exhbs({
+  extname: '.handlebars',
+  helpers: {
+    isValid: function(username, options) {
+      console.log(username);
+      if(username) {
+        return options.fn(this);
+      }
+    }
+  },
+  defaultLayout: 'layout', 
+  layoutsDir: __dirname + '/views/layouts/'
+}));
 app.set('view engine', '.handlebars');
 app.set('views', path.join(__dirname, 'views'));
 

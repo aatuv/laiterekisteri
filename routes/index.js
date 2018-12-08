@@ -3,7 +3,11 @@ var router = express.Router();
 
 // kotisivu HUOM: username
 router.get('/', loggedIn, (req, res, next) => {
-    res.render('home', {title: 'Laiterekisteri', username: req.user.TUNNUS, errors: req.session.errors});
+    let admin = false;
+    if (req.user.TUNNUS === "admin") {
+        admin = true;
+    }
+    res.render('home', {title: 'Laiterekisteri', admin: admin, username: req.user.TUNNUS, errors: req.session.errors});
     req.session.errors = null;
     error = null;
     
