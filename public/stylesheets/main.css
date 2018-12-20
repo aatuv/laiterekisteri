@@ -1,0 +1,306 @@
+html,
+body,
+.container {
+    margin: 0 auto;
+    font-family: fantasy;
+    height: 100%;
+}
+body {
+    background-color: lightgray;
+}
+.container {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    height: max-content;
+    width: max-content;
+}
+.wrapper {
+    display: grid;
+}
+.header {
+    margin: 0 auto;
+    position: relative;
+    align-content: center;
+    font-size: 1em;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #424242;
+    position: relative;
+    top: 0;
+    width: 100%;
+}
+
+.navbar ul li {
+    float: left;
+}
+.navbar ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.navbar ul li p {
+    font-size: 1em;
+    color: white;
+    font-weight: bold;
+}
+.highlight {
+    background-color: #74a86d;
+    padding-right: 0.5em;
+}
+.navbar ul li a:hover:not(.active) {
+    background-color: #111;
+}
+#otsikko {
+    font-weight: bold;
+}
+.row-2 {
+    flex: 3;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+
+}
+.row-3 {
+    flex: 1;
+}
+.login-div {
+    display: flex;
+    position: static;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: .5em;
+    height: 700px;
+    width: 400px;
+    padding: 3em;
+    padding-top: 1em;
+    background-color: #424242;
+    color: white;
+    font-size: 1.35em;
+}
+#login-header {
+    font-size: 1.35em;
+    border-radius: .25em;
+
+}
+.button-green {
+    all: unset;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+    padding: .5em 1.25em;
+    background-color:rgb(136, 177, 117);
+    color:rgb(255, 255, 255);
+    border-radius: .25em;
+}
+.button-green:hover {
+    background-color: #446944;
+}
+.button-cancel {
+    all: unset;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+    padding: .25em 1em;
+    background-color:#e97a72;
+    color:rgb(255, 255, 255);
+    border: 1px solid #000000;
+    border-radius: .15em;
+}
+.button-cancel:hover {
+    background-color: #922d25;
+    border: 1px solid #000000;
+}
+.button-confirm {
+    all: unset;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+    padding: .25em 1em;
+    background-color:rgb(136, 177, 117);
+    color:rgb(255, 255, 255);
+    border: 1px solid #000000;
+    border-radius: .15em;
+}
+.button-confirm:hover {
+    background-color: #446944;
+    border: 1px solid #000000;
+}
+.link {
+    border: solid 1px dodgerblue;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: .25em;
+    padding: .3em 1.25em;
+    color: white;
+    position: relative;
+    transition-duration: 0.3s;
+}
+.input {
+    border-radius: .25em;
+    height: 2em;
+    font-size: 1em;
+    outline: none;
+}
+.input:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+a, a:link, a:visited {
+    color: #92d2e6;
+}
+.link:hover {
+    background-color: rgb(70, 126, 190);
+    border: solid 1px rgb(70, 126, 190);
+}
+.button:hover {
+    background-color: khaki;
+}
+.errors {
+    background-color: #e79892;
+    padding: 5px;
+    margin-bottom: 10px;
+    min-width: 200px;
+    display: inline-block;
+    border: 1px solid #e74c3c;
+}
+  
+.errors ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+  
+.success {
+    background-color: #80cca0;
+    padding: 5px;
+}
+table, td, th {    
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    background-color: #727171;
+    color: white;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+}
+thead {
+    background-color: #424242;
+}
+
+tr:nth-child(even) {background-color: #999898;}
+
+#omatvaraukset div {
+    display: inline-block;
+    font-size: 1em;
+}
+#varaa {
+    float: right;
+    height: 1em;
+    width: 4em;
+    font-size: 2em;
+}
+#varaaLaite {
+    width: 60%;
+}
+#hakuehdot {
+    background-color: #727171;
+    color: rgb(255, 255, 255);
+    width: 70%;
+    padding: .5em;
+
+}
+.valid {
+    border: 1px solid green;
+    color: #000000;
+}
+
+.ui-dialog-titlebar-close {
+    visibility: hidden;
+}
+#dialog_rek {
+    background-color: #a8a6a6;
+    color: rgb(255, 255, 255);
+}
+#dialog_muuta {
+    background-color: #a8a6a6;
+    color: rgb(255, 255, 255);
+}
+#ptunnus {
+    visibility: hidden;
+}
+#laite_id, #kayttaja_id, #kayttajatunnus{
+    visibility: hidden;
+}
+.dialog-form {
+    display: table;
+    font-size: 1.25em;
+}
+.dialog-form p {
+    display: table-row;
+    padding: 20px;
+}
+.dialog-form label {
+    display: table-cell;
+    font-weight: bold;
+    margin-right: 30px;
+    margin-bottom: 50px;
+}
+.dialog-form input {
+    display: table-cell;
+    height: 1.5em;
+    font-size: 1em;
+    outline: none;
+    border-radius: .25em;
+    margin-bottom: 50px;
+    margin-right: 20px;
+}
+.dialog-form select {
+    display: table-cell;
+    margin-bottom: 50px;
+    margin-right: 20px;
+}
+.dialog-form button {
+    display: table-cell;
+    margin-right: 50px;
+}
+.dialog-form .button-confirm {
+    display: table-cell;    
+}
+.ui-dialog-title{
+    font-size: 1.5em;
+}
+.ui-widget-overlay
+{
+  opacity: .8 !important; /* Make sure to change both of these, as IE only sees the second one */
+  filter: Alpha(Opacity=50) !important;
+
+  background: rgb(24, 23, 23) !important; /* This will make it darker */
+}
+.error {
+    color: red;
+}
+
+.alignleft {
+    float: left;
+}
+.alignright {
+    float: right;
+}
+  
