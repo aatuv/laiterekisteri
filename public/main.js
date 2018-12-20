@@ -11,7 +11,6 @@ $(document).ready(() => {
         $.getJSON("http://localhost:3001/current_user", (data) => {
             if (data.hasOwnProperty('username')) {
                 $("#kayttajatunnus").val(data.username);
-                console.log($("#kayttajatunnus").val() + " tää oli");
                 $("#nayta_varaukset").click();
             }
         });
@@ -20,7 +19,6 @@ $(document).ready(() => {
 
     $("#nayta_varaukset").click(() => {
         $("#table_varaukset").empty();
-        console.log("tunnus on " + $("#kayttajatunnus").val());
         let TUNNUS = $("#kayttajatunnus").val();
         let ALKUPVM = $("#alkupvm").val();
         let LOPPUPVM = $("#loppupvm").val();
@@ -176,7 +174,6 @@ $(document).ready(() => {
                 cache: false,
                 success: function (data) {
                     omistajat = JSON.parse(JSON.stringify(data));
-                    console.log(omistajat);
                     for (let i = 0; i < omistajat.length; i++) {
                         $("#dselect_omistaja option:last").after('<option value="' + omistajat[i]["OMISTAJA_ID"] + '">' + omistajat[i]["NIMI"] + '</option>');
                     }
@@ -190,7 +187,6 @@ $(document).ready(() => {
                 cache: false,
                 success: function (data) {
                     kategoriat = JSON.parse(JSON.stringify(data));
-                    console.log(kategoriat);
                     for (let i = 0; i < kategoriat.length; i++) {
                         $("#dselect_kategoria option:last").after('<option value="' + kategoriat[i]["KATEGORIA_ID"] + '">' + kategoriat[i]["SELITE"] + '</option>');
                     }
@@ -209,7 +205,6 @@ $(document).ready(() => {
     $(document).on("click", "[id^='muokkaa_laite']", (event) => {
         let laiteid = event.target.value;
         let laite = [];
-        $("#dialog_muokkaaLaite").dialog("open");
         $.ajax(
             {
                 url: "http://localhost:3001/thisgadget",
@@ -234,7 +229,6 @@ $(document).ready(() => {
                 method: 'GET',
                 success: function (data) {
                     omistajat = JSON.parse(JSON.stringify(data));
-                    console.log(omistajat);
                     for (let i = 0; i < omistajat.length; i++) {
                         $("#dmselect_omistaja option:last").after('<option value="' + omistajat[i]["OMISTAJA_ID"] + '">' + omistajat[i]["NIMI"] + '</option>');
                     }
@@ -247,27 +241,24 @@ $(document).ready(() => {
                 method: 'GET',
                 success: function (data) {
                     kategoriat = JSON.parse(JSON.stringify(data));
-                    console.log(kategoriat);
                     for (let i = 0; i < kategoriat.length; i++) {
                         $("#dmselect_kategoria option:last").after('<option value="' + kategoriat[i]["KATEGORIA_ID"] + '">' + kategoriat[i]["SELITE"] + '</option>');
                     }
                 }
             }
         )
+        $("#dialog_muokkaaLaite").dialog("open");
     });
 
     $(document).on("click", "[id^='poista_laite']", (event) => {
         let LAITE_ID = event.target.value;
-        console.log(LAITE_ID);
         $.ajax(
             {
                 url: "http://localhost:3001/delete_gadget/" + LAITE_ID,
                 method: 'DELETE',
                 success: function (data) {
-                    console.log(data);
                 },
                 error: function (err) {
-                    console.log(err);
                 }
             }
         )
@@ -324,7 +315,6 @@ $(document).ready(() => {
         $("#dialog_varaa").dialog("open");
         $("#admin_hae_laitteet").click();
         $("#laite_id").val(event.target.value);
-        console.log("laite id = " + $("#laite_id").val());
         $.getJSON("http://localhost:3001/current_user", (data) => {
             if (data.hasOwnProperty('username')) {
                 var tunnus = data.username;
@@ -335,7 +325,6 @@ $(document).ready(() => {
                         data: { TUNNUS: tunnus },
                         success: (data) => {
                             var kayttaja = JSON.parse(JSON.stringify(data));
-                            console.log(kayttaja);
                             $("#kayttaja_id").val(kayttaja[0]["KAYTTAJA_ID"]);
                         }
                     }
@@ -375,10 +364,8 @@ $(document).ready(() => {
                 url: "http://localhost:3001/delete_reservation/" + VARAUS_ID,
                 method: "DELETE",
                 success: function (data) {
-                    console.log(data);
                 },
                 error: function (err) {
-                    console.log(err);
                 }
             }
         )

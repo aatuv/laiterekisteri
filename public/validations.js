@@ -263,7 +263,6 @@ $(document).ready(() => {
             $("#dselect_kategoria").empty();
             $("#dialog_lisaaLaite").dialog("close");
             $("#admin_hae_laitteet").click();
-            location.reload();
         }
     });
 
