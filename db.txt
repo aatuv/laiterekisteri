@@ -47,8 +47,7 @@ CREATE TABLE IF NOT EXISTS `status` (
 INSERT INTO `status` (`STATUS_ID`,`KUVAUS`) 
 VALUES
 (1, 'LAINA'),
-(2, 'VARAUS'),
-(3, 'VAPAA');
+(2, 'VARAUS');
 
 -- -------------------------------------------------------
 
